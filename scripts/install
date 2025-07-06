@@ -29,6 +29,21 @@ ynh_script_progression "Adding $app's configuration files..."
 ynh_config_add --template=".env" --destination="$install_dir/.env"
 
 #=================================================
+# BUILD APP
+#=================================================
+ynh_script_progression "Building $app..."
+
+ynh_go_install
+
+pushd $install_dir/
+	ynh_hide_warnings ynh_exec_as_app CGO_ENABLED=0 go build -o pgbackweb
+popd
+
+ynh_go_remove
+
+#chmod +x "$install_dir/"
+
+#=================================================
 # SYSTEM CONFIGURATION
 #=================================================
 ynh_script_progression "Adding system configurations related to $app..."
