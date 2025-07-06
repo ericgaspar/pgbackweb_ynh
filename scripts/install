@@ -12,6 +12,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 key=$(ynh_string_random --length=32)
+timezone=$(timedatectl show --value --property=Timezone)
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
